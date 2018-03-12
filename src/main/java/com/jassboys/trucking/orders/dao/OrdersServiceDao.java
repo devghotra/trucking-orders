@@ -141,7 +141,16 @@ public class OrdersServiceDao {
 				//order.setCreatedByUser(rs.getString("created_by_user")); 
 				order.setTruckHaulerNumber(rs.getString("truck_hauler_number"));
 				order.setDriverName(rs.getString("driver_name"));
-				order.setBridgeToll(rs.getDouble("bridge_toll"));
+
+				int numOfTolls = rs.getInt("num_of_tolls");
+				double bridgeToll = rs.getDouble("bridge_toll");
+				if(bridgeToll > 0 && numOfTolls == 0){
+					numOfTolls = 1;
+				}
+
+				order.setNumOfTolls(numOfTolls);
+				order.setBridgeToll(bridgeToll);
+
 				order.setBrokagePercentage(rs.getDouble("brokage_percentage"));
 				order.setNetEntry(rs.getDouble("net_entry"));
 				order.setNotes(rs.getString("notes"));
@@ -220,6 +229,7 @@ public class OrdersServiceDao {
 				order.setTruckHaulerNumber(rs.getString("truck_hauler_number"));
 				order.setDriverName(rs.getString("driver_name"));
 				order.setNotes(rs.getString("notes"));
+				order.setNumOfTolls(rs.getInt("num_of_tolls"));
 				order.setBridgeToll(rs.getDouble("bridge_toll"));
 				order.setBrokagePercentage(rs.getDouble("brokage_percentage"));
 				order.setNetEntry(rs.getDouble("net_entry"));
@@ -375,7 +385,7 @@ public class OrdersServiceDao {
 					+ "INSERT INTO jborders.orders(order_date, shift, tag_number,prime_carrier, "
 					+ "customer,job_number,loads,rate_per_load,hours,rate_per_hour, "
 					+ "tons, rate_per_ton,entry_total,payment_status,paid_to_sub, truck_hauler_number, "
-					+ "driver_name, notes, bridge_toll, brokage_percentage, net_entry, standby_hours, rate_per_standby_hour, other_charges, "
+					+ "driver_name, notes, num_of_tolls, bridge_toll, brokage_percentage, net_entry, standby_hours, rate_per_standby_hour, other_charges, "
 					+ "mod_date_time,modified_by_user,created_by_user) "
 					+ "VALUES ("
 					+ "STR_TO_DATE('"+order.getOrderDate()+"', '%Y-%m-%d'),"
@@ -396,6 +406,7 @@ public class OrdersServiceDao {
 					+ "'"+order.getTruckHaulerNumber()+"',"
 					+ "'"+order.getDriverName()+"',"
 					+ "'"+order.getNotes()+"',"
+					+ ""+order.getNumOfTolls()+","
 					+ ""+order.getBridgeToll()+","
 					+ ""+order.getBrokagePercentage()+","
 					+ ""+order.getNetEntry()+","
@@ -833,6 +844,7 @@ public class OrdersServiceDao {
 					+ "entry_total = "+order.getEntryTotal()+", "
 					+ "brokage_percentage = "+order.getBrokagePercentage()+", "
 					+ "net_entry = "+order.getNetEntry()+", "
+					+ "num_of_tolls = "+order.getNumOfTolls()+", "
 					+ "bridge_toll = "+order.getBridgeToll()+", "
 					+ "payment_status = '"+order.getPaymentStatus()+"', "
 					+ "paid_to_sub = '"+order.getPaidToSub()+"', "
@@ -937,7 +949,15 @@ public class OrdersServiceDao {
 				ord.setStandbyHrsNRate(""+rs.getFloat("standby_hours")+"/<br/>"+rs.getDouble("rate_per_standby_hour"));
 				ord.setTonsNRate(""+rs.getFloat("tons")+"/<br/>"+rs.getDouble("rate_per_ton"));
 				ord.setEntryTotal(rs.getDouble("entry_total"));
-				ord.setBridgeToll(rs.getDouble("bridge_toll"));
+
+				int numOfTolls = rs.getInt("num_of_tolls");
+				double bridgeToll = rs.getDouble("bridge_toll");
+				if(bridgeToll > 0 && numOfTolls == 0){
+					numOfTolls = 1;
+				}
+
+				ord.setNumOfTolls(numOfTolls);
+				ord.setBridgeToll(bridgeToll);
 				ord.setPaymentStatus(rs.getString("payment_status"));
 				ord.setPaidToSub(rs.getString("paid_to_sub"));
 				//ord.setCreationDateTime(rs.getDate("creation_date_time"));

@@ -23,7 +23,11 @@ public class OrdersServiceImpl {
 	}
 	
 	public Order getOrderDetails(long orderId, String authtoken) throws Exception{
-		return ordersServiceDao.getOrderDetails(orderId, authtoken);
+		Order order = ordersServiceDao.getOrderDetails(orderId, authtoken);
+		if(order != null && order.getNumOfTolls() == 0 && order.getBridgeToll() > 0){
+			order.setNumOfTolls(1);
+		}
+		return order;
 	}
 	
 	public Order addOrder(Order order, String authtoken) throws Exception{

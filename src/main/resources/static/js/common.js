@@ -85,24 +85,25 @@ $( "#addOrderForm #entryTotal" ).focus(function() {
 	  var loadRate = $( "#addOrderForm #ratePerLoad" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #ratePerLoad" ).val());
 	  var hrs = $( "#addOrderForm #hours" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #hours" ).val());
 	  var hrRate = $( "#addOrderForm #ratePerHour" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #ratePerHour" ).val());
-	  var stbyHrs = $( "#addOrderForm #standbyHours" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #standbyHours" ).val());
-	  var stbyHrRate = $( "#addOrderForm #ratePerStandbyHr" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #ratePerStandbyHr" ).val());
 	  var tons = $( "#addOrderForm #tons" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #tons" ).val());
 	  var tonRate = $( "#addOrderForm #ratePerTon" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #ratePerTon" ).val());
 	  //var brokage = $( "#addOrderForm #brokagePercentage" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #brokagePercentage" ).val());
 	  
-	  var total = loads*loadRate + hrs*hrRate + tons*tonRate + stbyHrs*stbyHrRate;
+	  var total = loads*loadRate + hrs*hrRate + tons*tonRate;
 	  //total = total - total*(brokage/100);
 	  
 	  $( "#addOrderForm #entryTotal" ).val(total);
 });
 
 $( "#addOrderForm #netEntry" ).focus(function() {
+      var stbyHrs = $( "#addOrderForm #standbyHours" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #standbyHours" ).val());
+	  var stbyHrRate = $( "#addOrderForm #ratePerStandbyHr" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #ratePerStandbyHr" ).val());
+      var numOfTolls = $( "#addOrderForm #numOfTolls" ).val().trim() == "" ? 1 : parseFloat($( "#addOrderForm #numOfTolls" ).val());
 	  var bridgeToll = $( "#addOrderForm #bridgeToll" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #bridgeToll" ).val());
 	  var totalEntry = $( "#addOrderForm #entryTotal" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #entryTotal" ).val());
 	  var otherCharges = $( "#addOrderForm #otherCharges" ).val().trim() == "" ? 0 : parseFloat($( "#addOrderForm #otherCharges" ).val());
 	  
-	  $( "#addOrderForm #netEntry" ).val(bridgeToll + totalEntry + otherCharges);
+	  $( "#addOrderForm #netEntry" ).val(bridgeToll*numOfTolls + totalEntry + otherCharges + stbyHrs*stbyHrRate);
 });
 
 $( "#viewEditOrderForm #entryTotal" ).focus(function() {
@@ -111,24 +112,25 @@ $( "#viewEditOrderForm #entryTotal" ).focus(function() {
 	  var loadRate = $( "#viewEditOrderForm #ratePerLoad" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #ratePerLoad" ).val());
 	  var hrs = $( "#viewEditOrderForm #hours" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #hours" ).val());
 	  var hrRate = $( "#viewEditOrderForm #ratePerHour" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #ratePerHour" ).val());
-	  var stbyHrs = $( "#viewEditOrderForm #standbyHours" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #standbyHours" ).val());
-	  var stbyHrRate = $( "#viewEditOrderForm #ratePerStandbyHr" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #ratePerStandbyHr" ).val());
 	  var tons = $( "#viewEditOrderForm #tons" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #tons" ).val());
 	  var tonRate = $( "#viewEditOrderForm #ratePerTon" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #ratePerTon" ).val());
 	  //var brokage = $( "#viewEditOrderForm #brokagePercentage" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #brokagePercentage" ).val());
 	  
-	  var total = loads*loadRate + hrs*hrRate + tons*tonRate + stbyHrs*stbyHrRate;
+	  var total = loads*loadRate + hrs*hrRate + tons*tonRate;
 	  //total = total - total*(brokage/100);
 
 	  $( "#viewEditOrderForm #entryTotal" ).val(total);
 });
 
 $( "#viewEditOrderForm #netEntry" ).focus(function() {
-	  var bridgeToll = $( "#viewEditOrderForm #bridgeToll" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #bridgeToll" ).val());
-	  var totalEntry = $( "#viewEditOrderForm #entryTotal" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #entryTotal" ).val());
-	  var otherCharges = $( "#viewEditOrderForm #otherCharges" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #otherCharges" ).val());
+    var stbyHrs = $( "#viewEditOrderForm #standbyHours" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #standbyHours" ).val());
+    var stbyHrRate = $( "#viewEditOrderForm #ratePerStandbyHr" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #ratePerStandbyHr" ).val());
+    var numOfTolls = $( "#viewEditOrderForm #numOfTolls" ).val().trim() == "" ? 1 : parseFloat($( "#viewEditOrderForm #numOfTolls" ).val());
+    var bridgeToll = $( "#viewEditOrderForm #bridgeToll" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #bridgeToll" ).val());
+	var totalEntry = $( "#viewEditOrderForm #entryTotal" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #entryTotal" ).val());
+	var otherCharges = $( "#viewEditOrderForm #otherCharges" ).val().trim() == "" ? 0 : parseFloat($( "#viewEditOrderForm #otherCharges" ).val());
 	  
-	  $( "#viewEditOrderForm #netEntry" ).val(bridgeToll + totalEntry + otherCharges);
+	  $( "#viewEditOrderForm #netEntry" ).val(bridgeToll*numOfTolls + totalEntry + otherCharges + stbyHrs*stbyHrRate);
 });
 
 $( "#viewEditOrderForm #totalPayment" ).focus(function() {
@@ -198,6 +200,7 @@ $( "#loginForm" ).submit(function( event ) {
 
 $( "#addOrderForm" ).submit(function( event ) {
 	$("#errorMsg").hide();
+    setDefaultNumOfTolls("addOrderForm");
 	$.ajax({
         url     : $(this).attr('action') + "?at="+authToken,
         type    : $(this).attr('method'),
@@ -486,6 +489,7 @@ $( "#orderLookUpForm" ).submit(function( event ) {
 
 $( "#viewEditOrderForm" ).submit(function( event ) {
 	$("#errorMsg").hide();
+    setDefaultNumOfTolls("viewEditOrderForm");
 	$.ajax({
         url     : $(this).attr('action') + "?at="+authToken,
         type    : $(this).attr('method'),
@@ -564,6 +568,7 @@ function loadOrdersDataTable(orderListArray, refresh){
 	var aaData="[";
 	for (var key in orderListArray){
 		var shift = orderListArray[key].shift == null ? "" : orderListArray[key].shift;
+		var tollsNTimes = orderListArray[key].numOfTolls + "/<br/>" + orderListArray[key].bridgeToll;
 		
 		aaData+=(key>0?",":"")+"[";
 	 
@@ -578,9 +583,9 @@ function loadOrdersDataTable(orderListArray, refresh){
             	"\""+orderListArray[key].hoursNRate+"\","+
             	"\""+orderListArray[key].loadsNRate+"\","+
             	"\""+orderListArray[key].tonsNRate+"\","+
-            	"\""+orderListArray[key].standbyHrsNRate+"\","+
             	"\""+orderListArray[key].entryTotal+"\","+
-				"\""+orderListArray[key].bridgeToll+"\","+
+            	"\""+orderListArray[key].standbyHrsNRate+"\","+
+				"\""+tollsNTimes+"\","+
 				"\""+orderListArray[key].otherCharges+"\","+
 				"\""+orderListArray[key].netEntry+"\","+
 				"\""+orderListArray[key].paymentStatus+"\","+
@@ -795,6 +800,7 @@ function loadOrder(orderId, tagNumber){
 			$('#viewEditOrderForm #tons').val(data.order.tons);
 			$('#viewEditOrderForm #ratePerTon').val(data.order.ratePerTon);
 			$('#viewEditOrderForm #entryTotal').val(data.order.entryTotal);
+            $('#viewEditOrderForm #numOfTolls').val(data.order.numOfTolls);
 			$('#viewEditOrderForm #bridgeToll').val(data.order.bridgeToll);
 			$('#viewEditOrderForm #paymentStatus').val(data.order.paymentStatus);
 			$('#viewEditOrderForm #paidToSub').val(data.order.paidToSub);
@@ -888,6 +894,17 @@ function signOut()
 	sessionStorage.removeItem('authToken');
 	location.reload();
 };
+
+/* Set num of tolls to 1 if bridge toll is set*/
+function setDefaultNumOfTolls(formId){
+    var bridgeToll = $( "#"+formId+" #bridgeToll" ).val().trim();
+    var numOfTolls = $( "#"+formId+" #numOfTolls" ).val().trim();
+
+    if(numOfTolls == "" && bridgeToll != ""){
+        $( "#"+formId+" #numOfTolls" ).val(1);
+	}
+
+}
 
 
 //$("#dialog").dialog({

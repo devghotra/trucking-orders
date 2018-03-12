@@ -13,6 +13,7 @@ public class Order implements Serializable {
 	private String primeCarrier;
 	private String customer;
 	private String jobNumber;
+	private int numOfTolls;
 	private double bridgeToll;
 	private float loads;
 	private double ratePerLoad;
@@ -232,6 +233,8 @@ public class Order implements Serializable {
 	public void setBridgeToll(double bridgeToll) {
 		this.bridgeToll = bridgeToll;
 	}
+	public int getNumOfTolls() { return numOfTolls; }
+	public void setNumOfTolls(int numOfTolls) { this.numOfTolls = numOfTolls; }
 	public double getBrokagePercentage() {
 		return brokagePercentage;
 	}
