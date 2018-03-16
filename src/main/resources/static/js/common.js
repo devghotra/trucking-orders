@@ -568,7 +568,9 @@ function loadOrdersDataTable(orderListArray, refresh){
 	var aaData="[";
 	for (var key in orderListArray){
 		var shift = orderListArray[key].shift == null ? "" : orderListArray[key].shift;
-		var tollsNTimes = orderListArray[key].numOfTolls + " x <br/>" + orderListArray[key].bridgeToll;
+		var numOfTolls = orderListArray[key].numOfTolls == null ? 0 : orderListArray[key].numOfTolls;
+        var tollCharge = orderListArray[key].bridgeToll == null ? 0 : orderListArray[key].bridgeToll;
+		var tollsNTimes = numOfTolls * tollCharge;
 		
 		aaData+=(key>0?",":"")+"[";
 	 
