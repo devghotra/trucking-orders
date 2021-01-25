@@ -555,6 +555,7 @@ function loadOrders(){
 			}).data('dynatable');*/
 		
 		if(data.responseCode == 200){
+		    console.log("orders fetched");
 			loadOrdersDataTable(data.orderList, false);
 			loadPaymentDataTable(data.orderList, false);
     	} else{
@@ -596,37 +597,28 @@ function loadOrdersDataTable(orderListArray, refresh){
 	  aaData+="]";
 	}
 	aaData+="]";
-	
+
+
 	if(refresh){
-		var oTable = $('#ordersTable').dataTable();
+        var oTable = $('#ordersTable').dataTable();
 		oTable.fnClearTable();
-		console.debug("Search Results Datatable: "+aaData);
 		oTable.fnAddData(JSON.parse(aaData));
 		oTable.fnDraw();
 	} else{
-		$('#ordersTable').dataTable( {
-	        "aaData": JSON.parse(aaData),
-	        //"sDom": 'Tfrtlip ',
-	        "sDom": 'T<"clear">lfrtip',
-	        //"sPaginationType": "full_numbers",
-	        "bAutoWidth": false,
-	        "aaSorting": [[ 0, "desc" ]],
-	        "oLanguage": {
-	            "sLengthMenu": "Display _MENU_ orders per page"
-	        },
-			"oTableTools": {
-				"aButtons": [
-								"copy",
-								"print",
-								{ "sExtends":"xls", "sFileName" : "jassboys-orders.xls"},
-								{ "sExtends":"pdf", "sFileName" : "jassboys-orders.pdf", "sPdfOrientation": "landscape"},
-							],
-							"sSwfPath": "media/copy_csv_xls_pdf.swf"
-			}
+        $('#ordersTable').dataTable( {
+	        aaData: JSON.parse(aaData),
+	        order: [[ 0, "desc" ]],
+            bAutoWidth: false,
+            dom: 'lf<"clear">rBtip',
+            pagingType: "simple_numbers",
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5',
+                'print'
+            ]
 	    } );
-		$(".dataTables_filter input").addClass("searchInputBox");
-		//$(".DTTT_button").removeClass("DTTT_button");
-		
 	}
 }
 
@@ -679,33 +671,23 @@ function loadPaymentDataTable(orderListArray, refresh){
 	if(refresh){
 		var oTable = $('#paymentTable').dataTable();
 		oTable.fnClearTable();
-		console.debug("Payment Results Datatable: "+aaData);
 		oTable.fnAddData(JSON.parse(aaData));
 		oTable.fnDraw();
 	} else{
-		$('#paymentTable').dataTable( {
-	        "aaData": JSON.parse(aaData),
-	        //"sDom": 'Tfrtlip ',
-	        "sDom": 'T<"clear">lfrtip',
-	        //"sPaginationType": "full_numbers",
-	        "bAutoWidth": false,
-	        "aaSorting": [[ 0, "desc" ]],
-	        "oLanguage": {
-	            "sLengthMenu": "Display _MENU_ payments per page"
-	        },
-			"oTableTools": {
-				"aButtons": [
-								"copy",
-								"print",
-								{ "sExtends":"xls", "sFileName" : "jassboys-orders-payment.xls"},
-								{ "sExtends":"pdf", "sFileName" : "jassboys-orders-payment.pdf", "sPdfOrientation": "landscape"},
-							],
-							"sSwfPath": "media/copy_csv_xls_pdf.swf"
-			}
-	    } );
-		$(".dataTables_filter input").addClass("searchInputBox");
-		//$(".DTTT_button").removeClass("DTTT_button");
-		
+        $('#paymentTable').dataTable( {
+            aaData: JSON.parse(aaData),
+            order: [[ 0, "desc" ]],
+            bAutoWidth: false,
+            dom: 'lf<"clear">rBtip',
+            pagingType: "simple_numbers",
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5',
+                'print'
+            ]
+        } );
 	}
 }
 

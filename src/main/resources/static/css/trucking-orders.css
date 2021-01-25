@@ -95,3 +95,16 @@ th{
 {
     display:none;
 }
+
+table.dataTable thead th, table.dataTable thead td {
+    padding: 8px;
+    border-bottom: 1px solid #111;
+}
+
+table.dataTable, table.dataTable th, table.dataTable td {
+    box-sizing: border-box;
+}
+
+div.dt-buttons {
+    float: right;
+}
